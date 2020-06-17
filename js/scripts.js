@@ -1,20 +1,78 @@
 function Game() {
-  this.gameMoves = [, , , , , , , , , ];
   this.newGameBoard = new Board;
+  this.gameMoves = [];
+  this.player1Turn = true;
+
   this.newGameBoard.drawBoard();
   this.newGameBoard.listener();
-  this.player1Turn = true;
 }
 
 Game.prototype.playerMove = function(index, x, y ){
-  if (this.player1Turn === true) {
-    this.newGameBoard.drawX(x, y);
-    this.gameMoves[index] = 'x';
-    this.player1Turn = false;
-  } else {
-    this.newGameBoard.drawO(x, y);
-    this.gameMoves[index] = 'o';
-    this.player1Turn = true;
+  if (!this.gameMoves[index]) {
+    if (this.player1Turn) {
+      this.newGameBoard.drawX(x, y);
+      this.gameMoves[index] = 'x';
+      this.player1Turn = false;
+    } else {
+      this.newGameBoard.drawO(x, y);
+      this.gameMoves[index] = 'o';
+      this.player1Turn = true;
+    }
+  }
+  if (this.gameMoves.length > 5) {
+    this.gameOverCheck();
+  }
+}
+
+Game.prototype.gameOverCheck = function() {
+  if (this.gameMoves[0] === this.gameMoves[1] && this.gameMoves[0] === this.gameMoves[2]) {
+    if (this.gameMoves[0] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[0] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[3] === this.gameMoves[4] && this.gameMoves[3] === this.gameMoves[5]) {
+    if (this.gameMoves[3] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[3] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[6] === this.gameMoves[7] && this.gameMoves[6] === this.gameMoves[8]) {
+    if (this.gameMoves[6] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[6] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[0] === this.gameMoves[3] && this.gameMoves[0] === this.gameMoves[6]) {
+    if (this.gameMoves[0] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[0] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[1] === this.gameMoves[4] && this.gameMoves[1] === this.gameMoves[7]) {
+    if (this.gameMoves[1] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[1] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[2] === this.gameMoves[5] && this.gameMoves[2] === this.gameMoves[8]) {
+    if (this.gameMoves[2] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[2] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[0] === this.gameMoves[4] && this.gameMoves[0] === this.gameMoves[8]) {
+    if (this.gameMoves[0] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[0] === "o") {
+      console.log('player 2 wins')
+    }
+  } else if (this.gameMoves[2] === this.gameMoves[4] && this.gameMoves[2] === this.gameMoves[6]) {
+    if (this.gameMoves[2] === "x") {
+      console.log('player 1 wins')
+    } else if (this.gameMoves[2] === "o") {
+      console.log('player 2 wins')
+    }
   }
 }
 
