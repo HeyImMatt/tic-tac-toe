@@ -1,12 +1,19 @@
 function Game() {
-  const player1 = new Player
-
-
+  this.gameMoves = [, , , , , , , , , ];
+  this.newGameBoard = new Board;
+  this.newGameBoard.drawBoard();
+  this.newGameBoard.listener();
 }
 
-function Player() {
-
+Game.prototype.playerMove = function(index, x, y ){
+  this.newGameBoard.drawX(x, y);
+  this.gameMoves[index] = 'x';
+  console.log(this.gameMoves)
 }
+// function Player(name) {
+//   // needs to make a mark
+//   this.name = name;
+// }
 
 function Board() {
   this.gameBoard = document.getElementById('gameBoard');
@@ -42,25 +49,23 @@ Board.prototype.drawBoard = function() {
   this.gameBoardCtx.moveTo(0, 200);
   this.gameBoardCtx.lineTo(300, 200);
   this.gameBoardCtx.stroke();
-
-  newGameBoard.listener();
 }
 
 Board.prototype.drawX = function(x, y) {
   this.gameBoardCtx.beginPath();
-  this.gameBoardCtx.moveTo(10,10);
-  this.gameBoardCtx.lineTo(90,90);
+  this.gameBoardCtx.moveTo(x - 40, y - 40);
+  this.gameBoardCtx.lineTo(x + 40, y + 40);
   this.gameBoardCtx.stroke();
 
   this.gameBoardCtx.beginPath();
-  this.gameBoardCtx.moveTo(90,10);
-  this.gameBoardCtx.lineTo(10,90);
+  this.gameBoardCtx.moveTo(x + 40, y - 40);
+  this.gameBoardCtx.lineTo(x - 40, y + 40);
   this.gameBoardCtx.stroke();
 }
 
 Board.prototype.drawO = function(x, y) {
   this.gameBoardCtx.beginPath();
-  this.gameBoardCtx.arc(150, 150, 40, 0, 2 * Math.PI);
+  this.gameBoardCtx.arc(x, y, 40, 0, 2 * Math.PI);
   this.gameBoardCtx.stroke();
 }
 
@@ -70,48 +75,42 @@ Board.prototype.listener = function() {
       xPos: event.layerX,
       yPos: event.layerY
     }
-    newGameBoard.spaceChecker(spaceClicked);
+    let coords = this.spaceChecker(spaceClicked);
+    newGame.playerMove(coords[0], coords[1], coords[2])
   })
 }
 
 Board.prototype.spaceChecker = function(spaceClicked) {
   if (spaceClicked.yPos <= this.row1) {
     if (spaceClicked.xPos <= this.col1) {
-      console.log("space 1");
+      return [0, 50, 50];
     } else if (spaceClicked.xPos <= this.col2) {
-      console.log("space 2");
+      return [1, 150, 50];
     } else if (spaceClicked.xPos <= this.col3) {
-      console.log("space 3")
+      return [2, 250, 50];
     }
   } else if (spaceClicked.yPos <= this.row2) {
     if (spaceClicked.xPos <= this.col1) {
-      console.log("space 4");
+      return [3, 50, 150];
     } else if (spaceClicked.xPos <= this.col2) {
-      console.log("space 5");
+      return [4, 150, 150];
     } else if (spaceClicked.xPos <= this.col3) {
-      console.log("space 6")
+      return [5, 250, 150];
     }
   } else if (spaceClicked.yPos <= this.row3) {
     if (spaceClicked.xPos <= this.col1) {
-      console.log("space 7");
+      return [6, 50, 250];
     } else if (spaceClicked.xPos <= this.col2) {
-      console.log("space 8");
+      return [7, 150, 250];
     } else if (spaceClicked.xPos <= this.col3) {
-      console.log("space 9")
+      return [8, 250, 250];
     }
   }
 }
 
-function playerAction(spaceClicked) {
-  console.log(spaceClicked)
-}
-
-function BoardSpace() {
-  
-}
-
 //DOM interaction
-let newGameBoard = new Board;
-newGameBoard.drawBoard();
-newGameBoard.drawX();
-newGameBoard.drawO();
+let newGame = new Game();
+// let newGameBoard = new Board;
+// newGameBoard.drawBoard();
+// newGameBoard.drawX();
+// newGameBoard.drawO();
