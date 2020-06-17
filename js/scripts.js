@@ -9,32 +9,46 @@ function Player() {
 }
 
 function Board() {
-
-
+  this.gameBoard = document.getElementById('gameBoard');
+  this.gameBoardCtx = gameBoard.getContext('2d');
 }
 
 Board.prototype.drawBoard = function() {
-  const gameBoard = document.getElementById('gameBoard');
-  const gameBoardCtx = gameBoard.getContext('2d');
-  gameBoardCtx.beginPath();
-  gameBoardCtx.moveTo(100, 0);
-  gameBoardCtx.lineTo(100, 300);
-  gameBoardCtx.stroke();
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.moveTo(100, 0);
+  this.gameBoardCtx.lineTo(100, 300);
+  this.gameBoardCtx.stroke();
 
-  gameBoardCtx.beginPath();
-  gameBoardCtx.moveTo(200, 0);
-  gameBoardCtx.lineTo(200, 300);
-  gameBoardCtx.stroke();
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.moveTo(200, 0);
+  this.gameBoardCtx.lineTo(200, 300);
+  this.gameBoardCtx.stroke();
 
-  gameBoardCtx.beginPath();
-  gameBoardCtx.moveTo(0, 100);
-  gameBoardCtx.lineTo(300, 100);
-  gameBoardCtx.stroke();
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.moveTo(0, 100);
+  this.gameBoardCtx.lineTo(300, 100);
+  this.gameBoardCtx.stroke();
   
-  gameBoardCtx.beginPath();
-  gameBoardCtx.moveTo(0, 200);
-  gameBoardCtx.lineTo(300, 200);
-  gameBoardCtx.stroke();
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.moveTo(0, 200);
+  this.gameBoardCtx.lineTo(300, 200);
+  this.gameBoardCtx.stroke();
+
+  newGameBoard.listener();
+}
+
+Board.prototype.listener = function() {
+  this.gameBoard.addEventListener('click', (event) => {
+    let spaceClicked = {
+      xPos: event.layerX,
+      yPos: event.layerY
+    }
+    playerAction(spaceClicked);
+  })
+}
+
+function playerAction(spaceClicked) {
+  console.log(spaceClicked)
 }
 
 function BoardSpace() {
