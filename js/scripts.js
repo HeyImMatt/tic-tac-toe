@@ -20,10 +20,12 @@ Game.prototype.playerMove = function(index, x, y ){
       this.player1Turn = true;
     }
   }
-  if (this.gameMoves.length >= 6) {
+  if (this.gameMoves.length >= 6 && this.gameMoves.length < 9) {
     this.gameOverCheck();
-  }
+  } //need a draw check
 }
+
+//refactor the F out of this function
 
 Game.prototype.gameOverCheck = function() {
   if (this.gameMoves[0] === this.gameMoves[1] && this.gameMoves[0] === this.gameMoves[2]) {
@@ -121,6 +123,7 @@ function Board() {
 }
 
 Board.prototype.drawBoard = function() {
+  //refactor this to use array for the coords and a foreach
   this.gameBoardCtx.beginPath();
   this.gameBoardCtx.moveTo(100, 0);
   this.gameBoardCtx.lineTo(100, 300);
@@ -160,6 +163,8 @@ Board.prototype.drawO = function(x, y) {
   this.gameBoardCtx.stroke();
 }
 
+//Board.prototype.drawLine for winner line
+
 Board.prototype.listener = function() {
   this.gameBoard.addEventListener('click', (event) => {
     let spaceClicked = {
@@ -198,7 +203,7 @@ Board.prototype.spaceChecker = function(spaceClicked) {
     }
   }
 }
-
+//This let newgame seems wrong (to be by itself)
 let newGame = new Game();
 
 function displayWinner() {
