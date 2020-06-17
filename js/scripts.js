@@ -17,12 +17,6 @@ function Board() {
   this.col1 = 100;
   this.col2 = 200;
   this.col3 = 300;
-  // this.space1 = { xPos: 100, yPos: 100 }
-  // this.space2 = { xPos: 200, yPos: 100 }
-  // this.space3 = { xPos: 300, yPos: 100 }
-  // this.space4 = { xPos: 100, yPos: 200 }
-  // this.space5 = { xPos: 200, yPos: 200 }
-  // this.space6 = { xPos: 300, yPos: 200 }
   //define the game spaces
   // compare spaceclick to the gamespaces
   // function to draw an x or o in the gamespace that the click occurred
@@ -50,6 +44,24 @@ Board.prototype.drawBoard = function() {
   this.gameBoardCtx.stroke();
 
   newGameBoard.listener();
+}
+
+Board.prototype.drawX = function(x, y) {
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.moveTo(10,10);
+  this.gameBoardCtx.lineTo(90,90);
+  this.gameBoardCtx.stroke();
+
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.moveTo(90,10);
+  this.gameBoardCtx.lineTo(10,90);
+  this.gameBoardCtx.stroke();
+}
+
+Board.prototype.drawO = function(x, y) {
+  this.gameBoardCtx.beginPath();
+  this.gameBoardCtx.arc(150, 150, 40, 0, 2 * Math.PI);
+  this.gameBoardCtx.stroke();
 }
 
 Board.prototype.listener = function() {
@@ -88,13 +100,6 @@ Board.prototype.spaceChecker = function(spaceClicked) {
       console.log("space 9")
     }
   }
-  // if (spaceClicked.xPos <= this.space1.xPos && spaceClicked.yPos <= this.space1.yPos) {
-  //   console.log('Space 1 clicked!')
-  // } else if (spaceClicked.xPos <= this.space2.xPos && spaceClicked.yPos <= this.space1.yPos) {
-  //   console.log('Space 2 clicked!')
-  // } else if (spaceClicked.xPos <= this.space3.xPos && spaceClicked.yPos <= this.space1.yPos) {
-  //   console.log('Space 3 clicked!')
-  // }
 }
 
 function playerAction(spaceClicked) {
@@ -108,5 +113,5 @@ function BoardSpace() {
 //DOM interaction
 let newGameBoard = new Board;
 newGameBoard.drawBoard();
-
-console.log(document.getElementById('gameBoard'));
+newGameBoard.drawX();
+newGameBoard.drawO();
