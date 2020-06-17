@@ -2,13 +2,14 @@ function Game() {
   this.newGameBoard = new Board;
   this.gameMoves = [];
   this.player1Turn = true;
+  this.gameOver = false;
 
   this.newGameBoard.drawBoard();
   this.newGameBoard.listener();
 }
 
 Game.prototype.playerMove = function(index, x, y ){
-  if (!this.gameMoves[index]) {
+  if (!this.gameOver) {
     if (this.player1Turn) {
       this.newGameBoard.drawX(x, y);
       this.gameMoves[index] = 'x';
@@ -19,7 +20,7 @@ Game.prototype.playerMove = function(index, x, y ){
       this.player1Turn = true;
     }
   }
-  if (this.gameMoves.length > 5) {
+  if (this.gameMoves.length >= 6) {
     this.gameOverCheck();
   }
 }
@@ -28,50 +29,82 @@ Game.prototype.gameOverCheck = function() {
   if (this.gameMoves[0] === this.gameMoves[1] && this.gameMoves[0] === this.gameMoves[2]) {
     if (this.gameMoves[0] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[0] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[3] === this.gameMoves[4] && this.gameMoves[3] === this.gameMoves[5]) {
     if (this.gameMoves[3] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[3] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[6] === this.gameMoves[7] && this.gameMoves[6] === this.gameMoves[8]) {
     if (this.gameMoves[6] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[6] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[0] === this.gameMoves[3] && this.gameMoves[0] === this.gameMoves[6]) {
     if (this.gameMoves[0] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[0] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[1] === this.gameMoves[4] && this.gameMoves[1] === this.gameMoves[7]) {
     if (this.gameMoves[1] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[1] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[2] === this.gameMoves[5] && this.gameMoves[2] === this.gameMoves[8]) {
     if (this.gameMoves[2] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[2] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[0] === this.gameMoves[4] && this.gameMoves[0] === this.gameMoves[8]) {
     if (this.gameMoves[0] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[0] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   } else if (this.gameMoves[2] === this.gameMoves[4] && this.gameMoves[2] === this.gameMoves[6]) {
     if (this.gameMoves[2] === "x") {
       console.log('player 1 wins')
+      this.gameOver = true;
+      displayWinner();
     } else if (this.gameMoves[2] === "o") {
       console.log('player 2 wins')
+      this.gameOver = true;
+      displayWinner();
     }
   }
 }
@@ -166,6 +199,16 @@ Board.prototype.spaceChecker = function(spaceClicked) {
   }
 }
 
-//DOM interaction
 let newGame = new Game();
 
+function displayWinner() {
+  setTimeout(function() {
+    alert('We have a winner')
+  }, 100);
+}
+
+document.getElementById('resetGame').addEventListener('click', () => {
+  if(confirm('Are you sure you want to reset?')) {
+    location.reload();
+  }
+})
