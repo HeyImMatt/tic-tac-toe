@@ -3,17 +3,20 @@ function Game() {
   this.newGameBoard = new Board;
   this.newGameBoard.drawBoard();
   this.newGameBoard.listener();
+  this.player1Turn = true;
 }
 
 Game.prototype.playerMove = function(index, x, y ){
-  this.newGameBoard.drawX(x, y);
-  this.gameMoves[index] = 'x';
-  console.log(this.gameMoves)
+  if (this.player1Turn === true) {
+    this.newGameBoard.drawX(x, y);
+    this.gameMoves[index] = 'x';
+    this.player1Turn = false;
+  } else {
+    this.newGameBoard.drawO(x, y);
+    this.gameMoves[index] = 'o';
+    this.player1Turn = true;
+  }
 }
-// function Player(name) {
-//   // needs to make a mark
-//   this.name = name;
-// }
 
 function Board() {
   this.gameBoard = document.getElementById('gameBoard');
@@ -24,9 +27,6 @@ function Board() {
   this.col1 = 100;
   this.col2 = 200;
   this.col3 = 300;
-  //define the game spaces
-  // compare spaceclick to the gamespaces
-  // function to draw an x or o in the gamespace that the click occurred
 }
 
 Board.prototype.drawBoard = function() {
@@ -110,7 +110,4 @@ Board.prototype.spaceChecker = function(spaceClicked) {
 
 //DOM interaction
 let newGame = new Game();
-// let newGameBoard = new Board;
-// newGameBoard.drawBoard();
-// newGameBoard.drawX();
-// newGameBoard.drawO();
+
