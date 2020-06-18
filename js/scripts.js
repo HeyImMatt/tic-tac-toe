@@ -30,29 +30,40 @@ Game.prototype.gameOverCheck = function() {
 
   if (this.gameMoves[0] ? this.gameMoves[0] === this.gameMoves[1] && this.gameMoves[0] === this.gameMoves[2] : false) {
     winnerMark = this.gameMoves[0];
+    this.newGameBoard.drawLine(0, 50, 300, 50)
   } else if (this.gameMoves[3] ? this.gameMoves[3] === this.gameMoves[4] && this.gameMoves[3] === this.gameMoves[5] : false) {
     winnerMark = this.gameMoves[3];
+    this.newGameBoard.drawLine(0, 150, 300, 150)
   } else if (this.gameMoves[6] ? this.gameMoves[6] === this.gameMoves[7] && this.gameMoves[6] === this.gameMoves[8] : false) {
     winnerMark = this.gameMoves[6];
+    this.newGameBoard.drawLine(0, 250, 300, 250)
   } else if (this.gameMoves[2] ? this.gameMoves[2] === this.gameMoves[4] && this.gameMoves[2] === this.gameMoves[6] : false ) {
     winnerMark = this.gameMoves[2];
+    this.newGameBoard.drawLine(300, 0, 0, 300)
   } else if (this.gameMoves[0] ? this.gameMoves[0] === this.gameMoves[4] && this.gameMoves[0] === this.gameMoves[8] : false ) {
     winnerMark = this.gameMoves[0];
+    this.newGameBoard.drawLine(0, 0, 300, 300)
   } else if (this.gameMoves[0] ? this.gameMoves[0] === this.gameMoves[3] && this.gameMoves[0] === this.gameMoves[6] : false ) {
     winnerMark = this.gameMoves[0];
+    this.newGameBoard.drawLine(50, 0, 50, 300)
   } else if (this.gameMoves[1] ? this.gameMoves[1] === this.gameMoves[4] && this.gameMoves[1] === this.gameMoves[7] : false ) {
     winnerMark = this.gameMoves[1];
+    this.newGameBoard.drawLine(150, 0, 150, 300)
   } else if (this.gameMoves[2] ? this.gameMoves[2] === this.gameMoves[5] && this.gameMoves[2] === this.gameMoves[8] : false ) {
     winnerMark = this.gameMoves[2];
+    this.newGameBoard.drawLine(250, 0, 250, 300)
   } else if (this.gameMoves.filter(mark => mark != false).length === 9) {
     winnerMark = 'draw'
   }
 
   if (winnerMark === 'x') {
+    this.gameOver = true;
     return 'Player 1 is the winner'
   } else if (winnerMark === "o") {
+    this.gameOver = true;
     return 'Player 2 is the winner'
   } else if (winnerMark === "draw") {
+    this.gameOver = true;
     return 'We have a draw'
   } 
 }
@@ -69,7 +80,6 @@ function Board() {
 }
 
 Board.prototype.drawBoard = function() {
-  //refactor this to use array for the coords and a foreach
   this.drawLine(100, 0, 100, 300)
   this.drawLine(200, 0, 200, 300)
   this.drawLine(0, 100, 300, 100)
