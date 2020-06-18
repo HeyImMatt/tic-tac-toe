@@ -1,3 +1,15 @@
 h1 {
   margin-left: 50px;
 }
+
+#player-1-wins {
+  display: none;
+}
+
+#player-2-wins {
+  display: none;
+}
+
+#draw {
+  display: none;
+}

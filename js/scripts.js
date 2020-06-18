@@ -3,25 +3,45 @@ function Game() {
   this.gameMoves = [];
   this.player1Turn = true;
   this.gameOver = false;
-
   this.newGameBoard.drawBoard();
   this.newGameBoard.listener();
 }
 
-Game.prototype.playerMove = function(index, x, y ){
+// Game.prototype.computerSim = function() {
+//    let spaceClicked = {
+//     xPos: Math.floor(Math.random() * 301),
+//     yPos: Math.floor(Math.random() * 301)
+//   }
+//   console.log(spaceClicked);
+//   let coords = this.newGameBoard.spaceChecker(spaceClicked);
+//   this.playerMove(coords[0], coords[1], coords[2], true)
+// }
+
+Game.prototype.playerMove = function(index, x, y, sim){
+  // if (sim) {
+  //   if ((!this.gameOver && !this.gameMoves[index])) {
+  //     this.newGameBoard.drawO(x, y);
+  //     this.gameMoves[index] = 'o';
+  //     this.player1Turn = true;
+  //   } else if(!this.gameOver) {
+  //     this.computerSim()
+  //   }
+  // }
   if (!this.gameOver && !this.gameMoves[index]) {
     if (this.player1Turn) {
       this.newGameBoard.drawX(x, y);
       this.gameMoves[index] = 'x';
       this.player1Turn = false;
-    } else {
+      //this.computerSim();
+    }
+    else {
       this.newGameBoard.drawO(x, y);
       this.gameMoves[index] = 'o';
       this.player1Turn = true;
     }
   }
   if (this.gameMoves.filter(mark => mark != false).length >= 5) {
-    console.log(this.gameOverCheck());
+    this.gameOverCheck();
   }
 }
 
@@ -58,12 +78,15 @@ Game.prototype.gameOverCheck = function() {
 
   if (winnerMark === 'x') {
     this.gameOver = true;
+    displayWinner("player-1-wins")
     return 'Player 1 is the winner'
   } else if (winnerMark === "o") {
     this.gameOver = true;
+    displayWinner("player-2-wins")
     return 'Player 2 is the winner'
   } else if (winnerMark === "draw") {
     this.gameOver = true;
+    displayWinner("draw")
     return 'We have a draw'
   } 
 }
@@ -145,10 +168,18 @@ Board.prototype.spaceChecker = function(spaceClicked) {
 //This let newgame seems wrong (to be by itself)
 let newGame = new Game();
 
-function displayWinner() {
+function displayWinner(winner) {
+  document.getElementById('gameBoard').style.pointerEvents = 'none';
   setTimeout(function() {
-    alert('We have a winner')
+    alert('Game Over')
   }, 100);
+  document.getElementById(winner).style.display = "block";
+}
+
+function displayPlayer(player1Turn) {
+  if (player1Turn === true) {
+    document.getElementById('player-turn').innerHTML = "X's turn ";
+  } else document.getElementById('player-turn').innerHTML = "O's turn ";
 }
 
 document.getElementById('resetGame').addEventListener('click', () => {
