@@ -19,96 +19,118 @@ Game.prototype.playerMove = function(index, x, y ){
       this.gameMoves[index] = 'o';
       this.player1Turn = true;
     }
+    console.log(this.gameOverCheck());
   }
-  if (this.gameMoves.length >= 6 && this.gameMoves.length < 9) {
-    this.gameOverCheck();
-  } //need a draw check
+  // if (this.gameMoves.length >= 5 && this.gameMoves.length <= 9) {
+  //   this.gameOverCheck();
+  // } //need a draw check
 }
 
 //refactor the F out of this function
 
 Game.prototype.gameOverCheck = function() {
-  if (this.gameMoves[0] === this.gameMoves[1] && this.gameMoves[0] === this.gameMoves[2]) {
-    if (this.gameMoves[0] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[0] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[3] === this.gameMoves[4] && this.gameMoves[3] === this.gameMoves[5]) {
-    if (this.gameMoves[3] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[3] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[6] === this.gameMoves[7] && this.gameMoves[6] === this.gameMoves[8]) {
-    if (this.gameMoves[6] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[6] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[0] === this.gameMoves[3] && this.gameMoves[0] === this.gameMoves[6]) {
-    if (this.gameMoves[0] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[0] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[1] === this.gameMoves[4] && this.gameMoves[1] === this.gameMoves[7]) {
-    if (this.gameMoves[1] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[1] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[2] === this.gameMoves[5] && this.gameMoves[2] === this.gameMoves[8]) {
-    if (this.gameMoves[2] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[2] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[0] === this.gameMoves[4] && this.gameMoves[0] === this.gameMoves[8]) {
-    if (this.gameMoves[0] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[0] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
-    }
-  } else if (this.gameMoves[2] === this.gameMoves[4] && this.gameMoves[2] === this.gameMoves[6]) {
-    if (this.gameMoves[2] === "x") {
-      console.log('player 1 wins')
-      this.gameOver = true;
-      displayWinner();
-    } else if (this.gameMoves[2] === "o") {
-      console.log('player 2 wins')
-      this.gameOver = true;
-      displayWinner();
+  let winnerMark;
+  for (let i = 0; i < this.gameMoves.length; i++) {
+    if (this.gameMoves[i]) {
+      if (this.gameMoves[i*3] ? this.gameMoves[i*3] === this.gameMoves[(i*3) + 1] && this.gameMoves[i*3] === this.gameMoves[(i*3) + 2] : false) {
+        winnerMark = this.gameMoves[i*3];
+      } else if (this.gameMoves[2] ? this.gameMoves[2] === this.gameMoves[4] && this.gameMoves[2] === this.gameMoves[6] : false ) {
+        winnerMark = this.gameMoves[2];
+      } else if ((this.gameMoves[i] === this.gameMoves[i + 3] && this.gameMoves[i] === this.gameMoves[i + 6])
+      || (this.gameMoves[i] === this.gameMoves[i + 4] && this.gameMoves[i] === this.gameMoves[i + 8])) {
+        winnerMark = this.gameMoves[i]
+      }
     }
   }
+  if (winnerMark === 'x') {
+    return 'player 1 is the winner'
+  } else if (winnerMark === "o") {
+    return 'player 2 is the winner'
+  } 
+
+
+  
+  // if (this.gameMoves[0] === this.gameMoves[1] && this.gameMoves[0] === this.gameMoves[2]) {
+  //   if (this.gameMoves[0] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[0] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[3] === this.gameMoves[4] && this.gameMoves[3] === this.gameMoves[5]) {
+  //   if (this.gameMoves[3] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[3] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[6] === this.gameMoves[7] && this.gameMoves[6] === this.gameMoves[8]) {
+  //   if (this.gameMoves[6] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[6] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[0] === this.gameMoves[3] && this.gameMoves[0] === this.gameMoves[6]) {
+  //   if (this.gameMoves[0] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[0] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[1] === this.gameMoves[4] && this.gameMoves[1] === this.gameMoves[7]) {
+  //   if (this.gameMoves[1] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[1] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[2] === this.gameMoves[5] && this.gameMoves[2] === this.gameMoves[8]) {
+  //   if (this.gameMoves[2] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[2] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[0] === this.gameMoves[4] && this.gameMoves[0] === this.gameMoves[8]) {
+  //   if (this.gameMoves[0] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[0] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // } else if (this.gameMoves[2] === this.gameMoves[4] && this.gameMoves[2] === this.gameMoves[6]) {
+  //   if (this.gameMoves[2] === "x") {
+  //     console.log('player 1 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   } else if (this.gameMoves[2] === "o") {
+  //     console.log('player 2 wins')
+  //     this.gameOver = true;
+  //     displayWinner();
+  //   }
+  // }
 }
 
 function Board() {
