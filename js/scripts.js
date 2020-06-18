@@ -9,7 +9,7 @@ function Game() {
 }
 
 Game.prototype.playerMove = function(index, x, y ){
-  if (!this.gameOver) {
+  if (!this.gameOver && !this.gameMoves[index]) {
     if (this.player1Turn) {
       this.newGameBoard.drawX(x, y);
       this.gameMoves[index] = 'x';
@@ -25,8 +25,6 @@ Game.prototype.playerMove = function(index, x, y ){
   //   this.gameOverCheck();
   // } //need a draw check
 }
-
-//refactor the F out of this function
 
 Game.prototype.gameOverCheck = function() {
   let winnerMark;
