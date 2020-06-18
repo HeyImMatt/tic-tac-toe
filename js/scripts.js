@@ -5,6 +5,7 @@ function Game() {
   this.gameOver = false;
   this.newGameBoard.drawBoard();
   this.newGameBoard.listener();
+  displayPlayer(this.player1Turn)
 }
 
 // Game.prototype.computerSim = function() {
@@ -43,6 +44,7 @@ Game.prototype.playerMove = function(index, x, y, sim){
   if (this.gameMoves.filter(mark => mark != false).length >= 5) {
     this.gameOverCheck();
   }
+  displayPlayer(this.player1Turn);
 }
 
 Game.prototype.gameOverCheck = function() {
@@ -178,8 +180,8 @@ function displayWinner(winner) {
 
 function displayPlayer(player1Turn) {
   if (player1Turn === true) {
-    document.getElementById('player-turn').innerHTML = "X's turn ";
-  } else document.getElementById('player-turn').innerHTML = "O's turn ";
+    document.getElementById('player-turn').innerHTML = "Player turn: X";
+  } else document.getElementById('player-turn').innerHTML = "Player turn: O";
 }
 
 document.getElementById('resetGame').addEventListener('click', () => {
