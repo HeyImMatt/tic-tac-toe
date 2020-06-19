@@ -1,3 +1,39 @@
 h1 {
+  margin-left: 80px;
+}
+
+#player-1-wins {
+  display: none;
+}
+
+#player-2-wins {
+  display: none;
+}
+
+#draw {
+  display: none;
+}
+
+#player-turn {
+  display: inline-block;
+  position: absolute;
+  font-size: 20px;
+  font-weight: 550;
+}
+
+#canvas {
+  width: 330px;
+  height: 330px;
+  border: 5px solid black;
+  display: inline-block;
+  background-color:  rgb(216, 233, 171);
+}
+
+canvas {
+  margin: 11px;
+}
+
+#resetGame {
   margin-left: 50px;
+
 }
